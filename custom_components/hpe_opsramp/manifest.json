@@ -1,0 +1,15 @@
+{
+  "domain": "hpe_opsramp",
+  "name": "HPE OpsRamp",
+  "codeowners": [
+    "@Choaterboater"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/Choaterboater/ha-hpe-opsramp",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/Choaterboater/ha-hpe-opsramp/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

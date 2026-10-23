@@ -1,0 +1,26 @@
+alert_action:
+  fields:
+    alert_id:
+      required: true
+      example: "12345678"
+      selector:
+        text:
+    action:
+      required: true
+      selector:
+        select:
+          translation_key: action
+          options:
+            - acknowledge
+            - unacknowledge
+            - suppress
+            - unsuppress
+            - close
+    comment:
+      example: "Looking at it"
+      selector:
+        text:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: hpe_opsramp

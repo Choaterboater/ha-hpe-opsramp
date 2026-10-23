@@ -1,0 +1,34 @@
+{
+  "entity": {
+    "sensor": {
+      "open_alerts": {
+        "default": "mdi:bell-alert-outline"
+      },
+      "critical_alerts": {
+        "default": "mdi:alert-octagon-outline"
+      },
+      "warning_alerts": {
+        "default": "mdi:alert-outline"
+      },
+      "unacknowledged_alerts": {
+        "default": "mdi:bell-ring-outline"
+      },
+      "open_incidents": {
+        "default": "mdi:ticket-outline"
+      },
+      "resources": {
+        "default": "mdi:server-network"
+      }
+    },
+    "event": {
+      "events": {
+        "default": "mdi:bell-outline"
+      }
+    }
+  },
+  "services": {
+    "alert_action": {
+      "service": "mdi:bell-check-outline"
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to HPE OpsRamp",
+        "description": "In OpsRamp: Setup → Account → Integrations, add a Custom Integration, set its inbound authentication to OAUTH2 with a role that can read alerts, resources and tickets, and generate a key. Enter your tenant's API host, the tenant id, the key and the secret. The secret is stored only in this config entry. Nothing in OpsRamp is changed unless you allow alert actions in the options later.",
+        "data": {
+          "base_url": "API host",
+          "tenant_id": "Tenant ID",
+          "client_id": "Key (client ID)",
+          "client_secret": "Secret"
+        },
+        "data_description": {
+          "base_url": "Your tenant's API host, for example {example_url}.",
+          "tenant_id": "The client (or partner) id OpsRamp shows with the key."
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "OpsRamp refused this key / secret, or the key may not read alerts of this tenant.",
+      "cannot_connect": "Could not reach OpsRamp at that API host.",
+      "invalid_tenant": "A tenant id has only letters, digits, - and _."
+    },
+    "abort": {
+      "already_configured": "This OpsRamp tenant is already set up."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "HPE OpsRamp",
+        "data": {
+          "scan_seconds": "Check OpsRamp every (seconds)",
+          "allow_actions": "Allow alert actions from Home Assistant"
+        },
+        "data_description": {
+          "scan_seconds": "Each check makes one alert search and one incident search; OpsRamp allows a client tenant 50 alert searches a minute.",
+          "allow_actions": "Off: Home Assistant only reads OpsRamp. On: admin users, automations and scripts can acknowledge, suppress or close alerts with the hpe_opsramp.alert_action action, and Assist gets a tool that does the same."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "open_alerts": {
+        "name": "Open alerts"
+      },
+      "critical_alerts": {
+        "name": "Critical alerts"
+      },
+      "warning_alerts": {
+        "name": "Warning alerts"
+      },
+      "unacknowledged_alerts": {
+        "name": "Unacknowledged alerts"
+      },
+      "open_incidents": {
+        "name": "Open incidents"
+      },
+      "resources": {
+        "name": "Active resources"
+      }
+    },
+    "binary_sensor": {
+      "critical_alert": {
+        "name": "Critical alert"
+      }
+    },
+    "event": {
+      "events": {
+        "name": "Events",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "alert_opened": "Alert opened",
+              "alert_cleared": "Alert cleared"
+            }
+          }
+        }
+      }
+    }
+  },
+  "selector": {
+    "action": {
+      "options": {
+        "acknowledge": "Acknowledge",
+        "unacknowledge": "Unacknowledge",
+        "suppress": "Suppress",
+        "unsuppress": "Unsuppress",
+        "close": "Close"
+      }
+    }
+  },
+  "services": {
+    "alert_action": {
+      "name": "Act on an alert",
+      "description": "Acknowledges, suppresses or closes an OpsRamp alert. Works only when the entry's options allow alert actions.",
+      "fields": {
+        "alert_id": {
+          "name": "Alert ID",
+          "description": "The alert's id (from the Open alerts sensor's alerts attribute)."
+        },
+        "action": {
+          "name": "Action",
+          "description": "What to do with the alert."
+        },
+        "comment": {
+          "name": "Comment",
+          "description": "A note for the alert's history."
+        },
+        "config_entry_id": {
+          "name": "Tenant",
+          "description": "The OpsRamp tenant, when more than one is set up."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_alert_id": {
+      "message": "{alert_id} is not an OpsRamp alert id."
+    },
+    "actions_disabled": {
+      "message": "Alert actions are off for {title}. Turn on \"Allow alert actions\" in its options first."
+    },
+    "action_failed": {
+      "message": "OpsRamp did not take the action: {error}"
+    },
+    "entry_not_loaded": {
+      "message": "No HPE OpsRamp tenant is loaded."
+    },
+    "pick_entry": {
+      "message": "More than one OpsRamp tenant is set up: pick the tenant."
+    }
+  }
+}
