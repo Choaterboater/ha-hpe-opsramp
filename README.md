@@ -65,9 +65,11 @@ action the integration checks OpsRamp again straight away.
 
 ## Install
 
-1. HACS → ⋮ → Custom repositories → `https://github.com/Choaterboater/ha-hpe-opsramp`, type *Integration*.
-2. Download **HPE OpsRamp**, restart Home Assistant.
-3. Settings → Devices & services → Add integration → **HPE OpsRamp**.
+1. Open HACS, search for **HPE OpsRamp**, download it and restart Home Assistant.
+2. Settings → Devices & services → Add integration → **HPE OpsRamp**.
+
+Manual: if you don't use HACS, copy `custom_components/hpe_opsramp` into your Home Assistant
+`config/custom_components/` folder, restart, then add the integration as in step 2.
 
 ## Set up
 
